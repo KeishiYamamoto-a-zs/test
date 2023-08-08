@@ -167,11 +167,8 @@ function answerQuestion(optionNumber) {
   if(chosenOption.isThisLastOption==true){
 
     saveToLocalStorage();
-    //画面のフェードアウトに合わせて遅延実行
-    setTimeout(function(){
-      window.location.href = chosenOption.href;
-    },200);
-
+    //画面のフェードアウトに合わせて遅延実行   
+    window.location.href = chosenOption.href;
   }
   /* 質問が続くなら、次の質問を指定する */
   else{

@@ -170,7 +170,7 @@ function answerQuestion(optionNumber) {
     //画面のフェードアウトに合わせて遅延実行
     setTimeout(function(){
       window.location.href = chosenOption.href;
-    },300);
+    },200);
 
   }
   /* 質問が続くなら、次の質問を指定する */

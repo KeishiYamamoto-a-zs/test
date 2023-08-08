@@ -4,7 +4,7 @@
     "theme_color": "#00fa9a",
     "background_color": "#00fa9a",
     "display": "standalone",
-    "start_url": "./question.html",
+    "start_url": "./index.html",
     "icons": [
       {
         "src": "./images/a-zs_logo.png",

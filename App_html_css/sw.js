@@ -19,7 +19,7 @@ const urlsToCache = [
   './informationConsent.html',
   './inputform.html',
   './question.html',
-  './title.html',
+  './index.html',
 ];
 
 //swは正常に登録されるとinstallイベントが走る

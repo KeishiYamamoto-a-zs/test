@@ -21,7 +21,22 @@
   <div class="text-center">
     <p class="catch-phrase">esprotsで最適な福利厚生をあなたに</p>
   </div>
+
+  <div>
+    <button id="admin-button" onclick="requirePassword()">管理者用ページ</button>
+  </div>
+
   <script>
+  //管理者用画面への遷移制御
+   function requirePassword(){
+     password=prompt("パスワードを入力してください","");
+     if ( password == "Syokai123@" ){
+         location.href="answersInformation.html";
+     }else{
+         alert( "パスワードが違います!" );
+     }
+}
+
     //PWA化のためのswを読み込み
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('./sw.js').then(registration => {

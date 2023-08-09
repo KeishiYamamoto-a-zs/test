@@ -16,6 +16,7 @@ const urlsToCache = [
   './demoResult.html',
   './demoResult2.html',
   './demoResult3.html',
+  './camera.html',
   './informationConsent.html',
   './inputform.html',
   './question.html',

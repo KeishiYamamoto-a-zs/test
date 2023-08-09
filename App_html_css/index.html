@@ -28,12 +28,16 @@
 
   <script>
   //管理者用画面への遷移制御
-   function requirePassword(){
+function requirePassword(){
      password=prompt("パスワードを入力してください","");
      if ( password == "Syokai123@" ){
          location.href="answersInformation.html";
-     }else{
-         alert( "パスワードが違います!" );
+     }
+     else if(password == null){
+        
+     }
+     else{
+        alert( "パスワードが違います" );
      }
 }
 

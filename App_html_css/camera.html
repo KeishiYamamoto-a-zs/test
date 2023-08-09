@@ -4,13 +4,41 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
-  <div>
+  <div class="container mt-5">
     <label><span>背面カメラ</span>
-    <input type="file" capture="environment" accept="image/*"></label>
+      <input type="file" capture="environment" accept="image/*" id="cameraInput">
+    </label>
+    <div class="mt-3">
+      <img id="preview" class="img-fluid" alt="プレビュー" style="display: none;">
     </div>
-    <button type="button" class="btn btn-primary" disabled id="agreeButton" button onclick="location.href='inputform.html'">同意する</button>
+    <div class="mt-3">
+      <a href="#" download="photo.png" class="btn btn-success" id="downloadButton" style="display: none;">写真を保存</a>
+    </div>
+    <button type="button" class="btn btn-primary" disabled id="agreeButton" onclick="location.href='inputform.html'">同意する</button>
+  </div>
+
+  <script>
+    const cameraInput = document.getElementById('cameraInput');
+    const preview = document.getElementById('preview');
+    const downloadButton = document.getElementById('downloadButton');
+
+    cameraInput.addEventListener('change', function() {
+      const file = this.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          preview.src = e.target.result;
+          downloadButton.href = e.target.result;
+          preview.style.display = 'block';
+          downloadButton.style.display = 'inline-block';
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>

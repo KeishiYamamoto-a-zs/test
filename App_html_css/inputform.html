@@ -14,14 +14,16 @@
   <div class="container mt-5"> <!-- コンテナーを追加 -->
     <div class="row justify-content-center"> <!-- センタリング用の行を追加 -->
       <div class="col-sm-8"> <!-- カラムを追加して幅を調整 -->
-       <form id="submitForm" onsubmit="startDiagnosis();" method="post" action="/question.html">
+       <form id="submitForm" onsubmit="return validationForm()" method="post" action="question.html">
         <div class="mb-5">
-          <label for="InputConpanyName" class="form-label" style="font-size: 25px;">企業名</label>
-          <input type="text" class="form-control"  aria-describedby="emailHelp" size="20" >
+          <label for="companyName" class="form-label" style="font-size: 25px;">企業名</label>
+          <input type="text" class="form-control" id="companyName" aria-describedby="emailHelp" size="20" >
+          <span id="companyNameError" class="text-danger"></span> <!-- 企業名エラー表示用 -->
         </div>
         <div class="mb-5">
-          <label for="exampleInputPassword1" class="form-label" style="font-size: 25px;">氏名</label>
-          <input type="text" class="form-control" >
+          <label for="fullName" class="form-label" style="font-size: 25px;">氏名</label>
+          <input type="text" class="form-control" id="fullName">
+          <span id="fullNameError" class="text-danger"></span> <!-- 氏名エラー表示用 -->
         </div>
         <div class="mb-5 form-check">
           <label class="mr-3" style="font-size: 25px;">従業員規模</label>
@@ -46,26 +48,57 @@
             <input class="form-check-input mr-4" type="radio" name="inlineRadioOptions" value="option5" style="transform:scale(2.0)">
             <label class="form-check-label mr-3" for="inlineRadio2" style="font-size: 25px;">1000~</label>
         </div>
-         <div>
+        <div>
+            <span id="companyOption" class="text-danger"></span>
+        </div>
+        </div>
           <div class="text-center mt-3">
-            <a href="question.html" onclick="document.getElementById('submitForm').submit()" class="btn btn--start btn--cubic btn--shadow">スタート</a>
+            <!--<a href="question.html" onclick="validateForm(),document.getElementById('submitForm').submit()" class="btn btn--start btn--cubic btn--shadow">スタート</a>-->
+            <button type="submit" class="btn btn-outline-success btn-lg ">スタート</button>
           </div>
       </form>
+        <div>
         <button type="button" class="btn btn-light btn-lg mt-4"onclick="back();">戻る</button>
       </div>
     </div>
   </div>
   <script>
-function startDiagnosis() {
 
-    event.preventDefault();
-    // 任意のロジックを実行 (例: バリデーション)
-    location.href = 'question.html';
-}
 function back() {
     // 任意のロジックを実行 (例: バリデーション)
     location.href = 'informationConsent.html';
 }
-  </script>
+
+
+function validationForm() {
+  // 既存のエラーをクリア
+  document.getElementById('companyNameError').textContent = '';
+  document.getElementById('fullNameError').textContent = '';
+
+  var companyName = document.getElementById('companyName').value.trim();
+  var fullName = document.getElementById('fullName').value.trim();
+  var selectedOption = document.querySelector('input[name="inlineRadioOptions"]:checked');
+  var isValid = true; // バリデーション全体の結果
+
+  if (companyName === "") {
+    document.getElementById('companyNameError').textContent = '企業名を入力してください。';
+    isValid = false;
+  }
+
+  if (fullName === "") {
+    document.getElementById('fullNameError').textContent = '氏名を入力してください。';
+    isValid = false;
+  }
+
+  if (selectedOption === null) {
+    document.getElementById('companyOption').textContent = '従業員規模を選択してください。';
+    isValid = false;
+  }
+
+  return isValid;
+}
+
+</script>
 </body>
 </html>
+

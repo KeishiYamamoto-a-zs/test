@@ -4,20 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/bootstrap.css">
 </head>
 <body>
-  <div class="container mt-5">
+  <header>
+    <img src="picture/a-zs_logo.png" class="ml-3 mt-3">
+  </header>
+  <div class="container mt-3 text-center">
     <label><span>背面カメラ</span>
       <input type="file" capture="environment" accept="image/*" id="cameraInput">
     </label>
     <div class="mt-3">
-      <img id="preview" class="img-fluid" alt="プレビュー" style="display: none;">
+      <img id="preview" class="img-fluid mx-auto d-block" alt="プレビュー" style="display: none;">
     </div>
     <div class="mt-3">
-      <a href="#" download="photo.png" class="btn btn-success" id="downloadButton" style="display: none;">写真を保存</a>
-    </div>
-    <button type="button" class="btn btn-primary" disabled id="agreeButton" onclick="location.href='inputform.html'">同意する</button>
+      <a href="#" download="photo.png" class="btn btn-primary btn-lg mr-2" id="downloadButton" style="display: none;" onclick="enableAgreeButton()">写真を保存</a>
+      <button type="button" class="btn btn-outline-success btn-lg" disabled id="agreeButton" onclick="location.href='inputform.html'">次へ</button>
   </div>
 
   <script>
@@ -38,7 +40,12 @@
         reader.readAsDataURL(file);
       }
     });
+
+    // この関数は、ユーザーが写真を保存した後に「次へ」ボタンを有効にする
+    function enableAgreeButton() {
+      document.getElementById('agreeButton').disabled = false;
+    }
   </script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="/App_frontDesign/App_html_css/bootstrap.min.js"></script>
 </body>
 </html>

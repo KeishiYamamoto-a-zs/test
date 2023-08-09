@@ -17,12 +17,12 @@
        <form id="submitForm" onsubmit="return validationForm()" action="question.html">
         <div class="mb-5">
           <label for="companyName" class="form-label" style="font-size: 25px;">企業名</label>
-          <input type="text" class="form-control" id="companyName" aria-describedby="emailHelp" size="20" >
+          <input type="text" name="companyName" class="form-control" id="companyName" aria-describedby="emailHelp" size="20" >
           <span id="companyNameError" class="text-danger"></span> <!-- 企業名エラー表示用 -->
         </div>
         <div class="mb-5">
           <label for="fullName" class="form-label" style="font-size: 25px;">氏名</label>
-          <input type="text" class="form-control" id="fullName">
+          <input type="text" name="userName" class="form-control" id="fullName">
           <span id="fullNameError" class="text-danger"></span> <!-- 氏名エラー表示用 -->
         </div>
         <div class="mb-5 form-check">

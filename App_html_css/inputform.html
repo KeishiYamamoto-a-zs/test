@@ -17,35 +17,35 @@
        <form id="submitForm" onsubmit="return validationForm()" action="question.html">
         <div class="mb-5">
           <label for="companyName" class="form-label" style="font-size: 25px;">企業名</label>
-          <input type="text" name="companyName" class="form-control" id="companyName" aria-describedby="emailHelp" size="20" >
+          <input type="text" class="form-control" id="companyName" aria-describedby="emailHelp" size="20" >
           <span id="companyNameError" class="text-danger"></span> <!-- 企業名エラー表示用 -->
         </div>
         <div class="mb-5">
           <label for="fullName" class="form-label" style="font-size: 25px;">氏名</label>
-          <input type="text" name="userName" class="form-control" id="fullName">
+          <input type="text" class="form-control" id="fullName">
           <span id="fullNameError" class="text-danger"></span> <!-- 氏名エラー表示用 -->
         </div>
         <div class="mb-5 form-check">
           <label class="mr-3" style="font-size: 25px;">従業員規模</label>
           <br>
           <div class="form-check form-check-inline">
-              <input class="form-check-input mr-4" type="radio" name="inlineRadioOptions" value="option1" style="transform:scale(2.0)">
+              <input class="form-check-input employee-size-option mr-4" type="radio"  value="option1" style="transform:scale(2.0)">
               <label class="form-check-label mr-3" for="inlineRadio1" style="font-size: 25px;">~50</label>
           </div>
           <div class="form-check form-check-inline">
-              <input class="form-check-input mr-4" type="radio" name="inlineRadioOptions" value="option2" style="transform:scale(2.0)">
+              <input class="form-check-input employee-size-option mr-4" type="radio"  value="option2" style="transform:scale(2.0)">
               <label class="form-check-label mr-3" for="inlineRadio2" style="font-size: 25px;">51~100</label>
           </div>
           <div class="form-check form-check-inline">
-              <input class="form-check-input mr-4" type="radio" name="inlineRadioOptions" value="option3" style="transform:scale(2.0)">
+              <input class="form-check-input employee-size-option mr-4" type="radio"  value="option3" style="transform:scale(2.0)">
               <label class="form-check-label mr-3" for="inlineRadio2" style="font-size: 25px;">101~500</label>
           </div>
           <div class="form-check form-check-inline">
-              <input class="form-check-input mr-4" type="radio" name="inlineRadioOptions" value="option4" style="transform:scale(2.0)">
+              <input class="form-check-input employee-size-option mr-4" type="radio"  value="option4" style="transform:scale(2.0)">
               <label class="form-check-label mr-3" for="inlineRadio2" style="font-size: 25px;">501~1000</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input mr-4" type="radio" name="inlineRadioOptions" value="option5" style="transform:scale(2.0)">
+            <input class="form-check-input employee-size-option mr-4" type="radio"  value="option5" style="transform:scale(2.0)">
             <label class="form-check-label mr-3" for="inlineRadio2" style="font-size: 25px;">1000~</label>
         </div>
         <div>
@@ -77,7 +77,7 @@ function validationForm() {
 
   var companyName = document.getElementById('companyName').value.trim();
   var fullName = document.getElementById('fullName').value.trim();
-  var selectedOption = document.querySelector('input[name="inlineRadioOptions"]:checked');
+  var selectedOption = document.querySelector('.employee-size-option:checked');
   var isValid = true; // バリデーション全体の結果
 
   if (companyName === "") {
@@ -101,4 +101,3 @@ function validationForm() {
 </script>
 </body>
 </html>
-

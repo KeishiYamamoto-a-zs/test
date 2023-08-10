@@ -14,47 +14,50 @@
   <div class="container mt-5"> <!-- コンテナーを追加 -->
     <div class="row justify-content-center"> <!-- センタリング用の行を追加 -->
       <div class="col-sm-8"> <!-- カラムを追加して幅を調整 -->
-       <form id="submitForm" onsubmit="return validationForm()" action="question.html">
+       <form id="submitForm" name="form" onsubmit="return validationForm()" action="question.html">
+
         <div class="mb-5">
           <label for="companyName" class="form-label" style="font-size: 25px;">企業名</label>
-          <input type="text" class="form-control" id="companyName" aria-describedby="emailHelp" size="20" >
+          <input type="text" name="companyName" class="form-control" id="companyName" aria-describedby="emailHelp" size="20" >
           <span id="companyNameError" class="text-danger"></span> <!-- 企業名エラー表示用 -->
         </div>
+
         <div class="mb-5">
           <label for="fullName" class="form-label" style="font-size: 25px;">氏名</label>
-          <input type="text" class="form-control" id="fullName">
+          <input type="text" name="userName" class="form-control" id="userName">
           <span id="fullNameError" class="text-danger"></span> <!-- 氏名エラー表示用 -->
         </div>
+
         <div class="mb-5 form-check">
           <label class="mr-3" style="font-size: 25px;">従業員規模</label>
           <br>
           <div class="form-check form-check-inline">
-              <input class="form-check-input employee-size-option mr-4" type="radio"  value="option1" style="transform:scale(2.0)">
+              <input class="form-check-input employee-size-option mr-4" type="radio" name="numberOfEmployees"  value="option1" style="transform:scale(2.0)">
               <label class="form-check-label mr-3" for="inlineRadio1" style="font-size: 25px;">~50</label>
           </div>
           <div class="form-check form-check-inline">
-              <input class="form-check-input employee-size-option mr-4" type="radio"  value="option2" style="transform:scale(2.0)">
+              <input class="form-check-input employee-size-option mr-4" type="radio" name="numberOfEmployees" value="option2" style="transform:scale(2.0)">
               <label class="form-check-label mr-3" for="inlineRadio2" style="font-size: 25px;">51~100</label>
           </div>
           <div class="form-check form-check-inline">
-              <input class="form-check-input employee-size-option mr-4" type="radio"  value="option3" style="transform:scale(2.0)">
+              <input class="form-check-input employee-size-option mr-4" type="radio" name="numberOfEmployees" value="option3" style="transform:scale(2.0)">
               <label class="form-check-label mr-3" for="inlineRadio2" style="font-size: 25px;">101~500</label>
           </div>
           <div class="form-check form-check-inline">
-              <input class="form-check-input employee-size-option mr-4" type="radio"  value="option4" style="transform:scale(2.0)">
+              <input class="form-check-input employee-size-option mr-4" type="radio" name="numberOfEmployees" value="option4" style="transform:scale(2.0)">
               <label class="form-check-label mr-3" for="inlineRadio2" style="font-size: 25px;">501~1000</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input employee-size-option mr-4" type="radio"  value="option5" style="transform:scale(2.0)">
+            <input class="form-check-input employee-size-option mr-4" type="radio" name="numberOfEmployees" value="option5" style="transform:scale(2.0)">
             <label class="form-check-label mr-3" for="inlineRadio2" style="font-size: 25px;">1000~</label>
         </div>
         <div>
             <span id="companyOption" class="text-danger"></span>
         </div>
         </div>
-          <div class="text-center mt-3 mr-4">
-            <a href="question.html"  class="btn btn--start btn--cubic btn--shadow">スタート</a>
-            <!--<button type="submit" class="btn btn-outline-success btn-lg ">スタート</button>-->
+          <div clonass="text-center mt-3 mr-4">
+            <a onclick="setSessionStorage();" class="btn btn--start btn--cubic btn--shadow">スタート</a>
+            <!--<button type="button" onclick="setSessionStorage();" class="btn btn-outline-success btn-lg ">スタート</button>-->
           
       </form>
         
@@ -66,7 +69,7 @@
 
 function back() {
     // 任意のロジックを実行 (例: バリデーション)
-    location.href = 'camera.html';
+    location.href = 'checkPhoto.html';
 }
 
 
@@ -76,8 +79,8 @@ function validationForm() {
   document.getElementById('fullNameError').textContent = '';
 
   var companyName = document.getElementById('companyName').value.trim();
-  var fullName = document.getElementById('fullName').value.trim();
-  var selectedOption = document.querySelector('.employee-size-option:checked');
+  var fullName = document.getElementById('userName').value.trim();
+  var selectedOption = document.querySelector('input[name="numberOfEmployees"]:checked');
   var isValid = true; // バリデーション全体の結果
 
   if (companyName === "") {
@@ -95,8 +98,37 @@ function validationForm() {
     isValid = false;
   }
 
+  console.log(isValid);
+
   return isValid;
 }
+
+    let formElements=document.forms.form;
+    let companyName=formElements.companyName.value;
+    let numberOfEmployees=formElements.numberOfEmployees.value;
+    let userName= formElements.userName.value;
+    
+    function setSessionStorage(){
+        let isValid = validationForm();
+        console.log(isValid);
+
+        if(isValid==false){
+
+        }else{
+        //formの中身を変数に格納
+        companyName=formElements.companyName.value;
+        numberOfEmployees=formElements.numberOfEmployees.value;
+        userName= formElements.userName.value;
+        //各変数をセッションストレージに保存
+        sessionStorage.setItem("companyName",companyName);
+        sessionStorage.setItem("numberOfEmployees",numberOfEmployees);
+        sessionStorage.setItem("userName",userName);
+
+        console.log(sessionStorage)
+        //診断画面に遷移
+        window.location.href="question.html"
+        }
+    }
 
 </script>
 </body>

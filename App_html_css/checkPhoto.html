@@ -22,7 +22,7 @@
           <label class="form-check-label" for="checkPhoto">写真を撮影しました</label>
         </div>
         <button type="button" class="btn btn-primary" id="nextButton" disabled onclick="location.href='inputform.html'">進む</button>
-        <button type="button" class="btn btn-light" button onclick="location.href='informationConsent.html',confirm('本当に戻りますか？')" >戻る</button>
+        <button type="button" class="btn btn-light" button onclick="confirmBack()">戻る</button>
       </div>
     </div>
   </div>
@@ -33,7 +33,12 @@
       const button = document.getElementById('nextButton');
       button.disabled = !checkbox.checked;
     }
-
+    function confirmBack() {
+      var shouldLeave = confirm('本当にこのページから戻りますか？');
+      if (shouldLeave) {
+        location.href = 'informationConsent.html';  // 本当に戻る
+      }
+    }
 
   </script>
 

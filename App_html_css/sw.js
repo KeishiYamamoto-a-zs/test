@@ -12,6 +12,7 @@ const urlsToCache = [
   './images/animalCrossing.jpg',
   './images/apex.jpg',
   './images/valorant.png',
+  './answersInformation.html',
   './app.js',
   './demoResult.html',
   './demoResult2.html',

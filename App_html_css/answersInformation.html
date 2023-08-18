@@ -6,20 +6,23 @@
     <title>e-sports診断フローチャート 回答一覧</title>
     <script src="" defer></script>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
     <!---PWA用のmanifestファイル-->
     <link rel="manifest" href="./manifest.json">
 </head>
 <body>
     <h2>e-sports診断回答一覧</h2>
-    <div id="table-container" style="margin-left:40%;">
-        <table id="data-table" border="1">
-            <th>会社名</th>
-            <th>名前</th>
-            <th>回答配列</th>
+    <div id="table-container">
+        <table class="table table-striped" id="data-table" border="2" align="center">
+            <th>ストレージキー（ランダムな数字）</th>
+            <th>回答日時</th>
+            <th>会社・ユーザー情報</th>
+            <th>回答一覧</th>
             <tr id="table-row">
-                <td id="company-name">デモ会社</td>
-                <td id="username">デモ名前</td>
-                <td id="answers-array">デモ回答</td>
+                <td>00000000000000</td>
+                <td style="width:150px;">2000年1月1日</td>
+                <td>デモ会社情報・氏名</td>
+                <td>デモ回答一覧</td>
             </tr>
         </table>
     </div>
@@ -27,42 +30,86 @@
         <a href="index.html">診断に戻る</a>
     </div>
 <script>
+
 /*グローバル変数を定義*/
 let storageKey;
 let storageValue;
 let storageLength = window.localStorage.length;
 
+/*ローカルストレージをキーでソートする*/
+/*ローカルストレージの各要素を要素としてもつ配列を作成し、それをソートする
+*ローカルストレージから全てのキーの配列を取得、その配列に対してmap()で操作を加えている
+*配列の各要素を、連想配列({key:キー情報,value:値情報}＝ローカルストレージの各要素）にしている
+*/
+let dataArray = Object.keys(localStorage).map((k)=>({key:k, value:localStorage[k]}));
+//キーで昇順にソート
+dataArray.sort((a,b)=>a.key - b.key);
+
+//ソート済みのローカルストレージデータを格納する変数を宣言
+let allData = Object.assign({},...dataArray.map((data)=>({[data.key]:data.value})));
+
+
 /* ローカルストレージの要素数の文だけfor文で繰り返す */
   let i
   for(i=0;i<storageLength;i++){
     
-    //ストレージのキーを取得
-    storageKey = window.localStorage.key(i);
+    //ストレージのキーを取得(昇順にするために、ソートした配列（dataArray）から、値を参照するローカルストレージのキーを取得する)
+    storageKey = dataArray[i].key;
     //値の取得
     storageValue = window.localStorage.getItem(storageKey);
+    //文字列として保存されているため、オブジェクト化する
+    let storageValueObj = JSON.parse(storageValue);
 
     /* テーブル要素の追加 */
     let table =document.getElementById('data-table')
         //行を一行定義
         let tr = document.createElement('tr');
-        //行に列（td）を３つ追加
-        let companyName = document.createElement('td');
-        companyName.innerHTML = "デモ会社";
-        tr.appendChild(companyName);
+        //行に列（td）を3つ追加
+
+        //回答日時のyyyymmddhh24miss形式（キー）
         let username = document.createElement('td');
         username.innerHTML = storageKey;
         tr.appendChild(username);
+
+        //回答日時のyyyy年mm月dd日
+        let answerDate = document.createElement('td');
+        answerDate.innerHTML= storageValueObj["日付"];
+        tr.appendChild(answerDate);
+
+        //会社情報
+        let companyInfo = document.createElement('td');
+        //文字列に再変換する
+        companyInfo.innerHTML = JSON.stringify(storageValueObj["会社・ユーザー情報"]);
+        tr.appendChild(companyInfo);
+
+        //保存したデータ（値）
         let answersArray = document.createElement('td');
-        answersArray.innerHTML=storageValue;
+        //文字列に再変換する
+        answersArray.innerHTML= JSON.stringify(storageValueObj["回答"]);
         tr.appendChild(answersArray);
+
     //行をテーブルの最後に追加
     table.appendChild(tr);
 
     
-    //出力
+    //ログ出力
     console.log(storageKey+":"+storageValue);
 
-  }
+    // 保存するJSONファイルの名前
+    const fileName = "answers.json";
+// データをJSON形式の文字列に変換する。
+const data = JSON.stringify(allData);
+// HTMLのaタグ要素を生成する。
+const link = document.createElement("a");
+// リンク先にJSON形式の文字列データを置いておく。
+link.href = "data:text/plain," + encodeURIComponent(data);
+//HTML上で表示
+link.innerHTML="保存";
+document.body.appendChild(link);
+// リンクを踏むと保存し、保存するJSONファイルの名前をリンクに設定する。
+link.download = fileName;
+
+ }
 </script>
 </body>
 </html>

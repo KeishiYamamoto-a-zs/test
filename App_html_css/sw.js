@@ -17,10 +17,11 @@ const urlsToCache = [
   './demoResult.html',
   './demoResult2.html',
   './demoResult3.html',
-  './camera.html',
+  './checkPhoto.html',
   './informationConsent.html',
   './inputform.html',
   './question.html',
+  './questions.js',
   './index.html',
 ];
 

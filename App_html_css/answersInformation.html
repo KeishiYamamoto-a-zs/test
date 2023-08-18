@@ -91,25 +91,27 @@ let allData = Object.assign({},...dataArray.map((data)=>({[data.key]:data.value}
     //行をテーブルの最後に追加
     table.appendChild(tr);
 
-    
+  }
     //ログ出力
     console.log(storageKey+":"+storageValue);
 
-    // 保存するJSONファイルの名前
-    const fileName = "answers.json";
+   // 保存するJSONファイルの名前
+const fileName = "answers.json";
 // データをJSON形式の文字列に変換する。
-const data = JSON.stringify(allData);
-// HTMLのaタグ要素を生成する。
-const link = document.createElement("a");
-// リンク先にJSON形式の文字列データを置いておく。
-link.href = "data:text/plain," + encodeURIComponent(data);
-//HTML上で表示
-link.innerHTML="保存";
-document.body.appendChild(link);
-// リンクを踏むと保存し、保存するJSONファイルの名前をリンクに設定する。
-link.download = fileName;
-
- }
+if(Object.keys(allData).length==0){
+    //データ数が0なら何もしない
+}else{
+    const data = JSON.stringify(allData);
+    // HTMLのaタグ要素を生成する。
+    const link = document.createElement("a");
+    // リンク先にJSON形式の文字列データを置いておく。
+    link.href = "data:text/plain," + encodeURIComponent(data);
+    //HTML上で表示
+    link.innerHTML="保存";
+    document.body.appendChild(link);
+    // リンクを踏むと保存し、保存するJSONファイルの名前をリンクに設定する。
+    link.download = fileName;
+}
 </script>
 </body>
 </html>

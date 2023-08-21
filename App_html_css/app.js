@@ -1,23 +1,40 @@
 /*******　questions.jsで定義した質問を読み込み ********/
-let questions = window.questions;
+const questions = window.questions;
 
 
 /*******　質問の生成 ********/
-/*【デモ質問１】*/
-const demoQuestion1 = questions.Question1;
-/*【デモ質問2】*/
-const demoQuestion2 = questions.Question2;
-/*【デモ質問3】*/
-const demoQuestion3 = questions.Question3;
-/* 【デモ質問4】:最終質問 */
-const demoQuestion4 = questions.Question4;
-/* 【デモ質問5】:最終質問 */
-const demoQuestion5 = questions.Question5;
-/*【デモ質問6】:最終質問 */
-const demoQuestion6 = questions.Question6;
+/*【質問１】*/
+const question1 = questions.Question1;
+/*【質問2】*/
+const question2 = questions.Question2;
+/*【質問3】*/
+const question3 = questions.Question3;
+/* 【質問4】 */
+const question4 = questions.Question4;
+/* 【質問5】 */
+const question5 = questions.Question5;
+/* 【質問6】 */
+const question6 = questions.Question6;
+/*【質問7】*/
+const question7 = questions.Question7;
+/*【質問8】*/
+const question8 = questions.Question8;
+/*【質問9】*/
+const question9 = questions.Question9;
+/* 【質問10】 */
+const question10 = questions.Question10;
+/* 【質問11】 */
+const question11 = questions.Question11;
+/* 【質問12】 */
+const question12 = questions.Question12;
+/* 【質問13】 */
+const question13 = questions.Question13;
+/* 【質問14】 */
+const question14 = questions.Question14;
+
 
 /* 質問配列の作成 */
-const questionsArrayList ={1:demoQuestion1,2:demoQuestion2,3:demoQuestion3,4:demoQuestion4,5:demoQuestion5,6:demoQuestion6}
+const questionsArrayList ={1:question1,2:question2,3:question3,4:question4,5:question5,6:question6,7:question7,8:question8,9:question9,10:question10,11:question11,12:question12,13:question13,14:question14}
 
 
 /*******　グローバル変数の管理 ********/
@@ -38,11 +55,11 @@ let currentQuestionNumber = 1;
 //一つ前の質問番号
 let previousQuestionNumber = 0;
 //現在の質問（質問番号１で初期化）
-let currentQuestion=demoQuestion1;
+let currentQuestion = question1;
 //選択肢１の表示名
-let currentQuestionOption1Name=currentQuestion.option1.name;
+let currentQuestionOption1Name = currentQuestion.option1.name;
 //選択肢２の表示名
-let currentQuestionOption2Name=currentQuestion.option2.name;
+let currentQuestionOption2Name = currentQuestion.option2.name;
 //回答を保存する連想配列：キーが質問番号で値が選択肢番号
 let answers = {};
 //回答した質問番号の履歴を保存する配列
@@ -194,7 +211,7 @@ function restart(){
   //現在の質問番号・一つ前の質問番号・現在の質問の初期化
   currentQuestionNumber = 1;
   previousQuestionNumber = 0;
-  currentQuestion=demoQuestion1;
+  currentQuestion=question1;
 
   //画面の更新
   pageTransition();
@@ -205,6 +222,7 @@ function restart(){
   console.log(optionNumberHistory);
 
 }
+
 //やり直しボタンが押されたときに確認ダイアログを表示
 let restartButton = document.getElementById('restart-button');
 restartButton.addEventListener('click',function(){
@@ -271,47 +289,40 @@ let year = now.getFullYear().toString();
 
 //月（一桁なら最初に0を付けて二桁にする/＊getMonth()は今の月-1の値が返ってくるため、+1している）
 let month; 
-if(now.getMonth()+1 > 9){
-  month = (now.getMonth()+1).toString();
-}else{
-  month = 0+(now.getMonth()+1).toString();
-}
+ month=adjustDateNumber(now.getMonth()+1);
 
 //日（一桁なら最初に0を付けて二桁にする）
 let date;
-if(now.getDate() > 9){
-  date = (now.getDate()).toString();
-}else{
-  date = 0+(now.getDate()).toString();
-}
+ date = adjustDateNumber(now.getDate());
+
 
 //時（一桁なら最初に0を付けて二桁にする）
 let hours;
-if(now.getHours() > 9){
-  hours = (now.getHours()).toString();
-}else{
-  hours = 0+(now.getHours()).toString();
-}
+ hours = adjustDateNumber(now.getHours());
+
 
 //分（一桁なら最初に0を付けて二桁にする）
 let minutes;
-if(now.getMinutes() > 9){
-  minutes = (now.getMinutes()).toString();
-}else{
-  minutes = 0+(now.getMinutes()).toString();
-}
+ minutes = adjustDateNumber(now.getMinutes());
 
 //秒（一桁なら最初に0を付けて二桁にする）
 let seconds;
-if(now.getSeconds() > 9){
-  seconds = (now.getSeconds()).toString();
-}else{
-  seconds = 0+(now.getSeconds()).toString();
-}
+  seconds = adjustDateNumber(now.getSeconds());
 
 let key = year+month+date+hours+minutes+seconds;
 return key;
 
+}
+
+/******* 数字が一桁の場合に冒頭に0を足すモジュール *******/
+function adjustDateNumber(n){
+  let adjustNumber;
+  if(n > 9){
+    adjustNumber = n.toString();
+  }else{
+    adjustNumber = 0+n.toString();
+  }
+  return adjustNumber;
 }
 
 /******* 16進数のシリアルナンバー作成するモジュール(web掲載時に使用するかも) *******/

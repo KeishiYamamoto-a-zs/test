@@ -13,7 +13,7 @@
 <body>
     <h2>e-sports診断回答一覧</h2>
     <div id="table-container">
-        <table class="table table-striped" id="data-table" border="2" align="center">
+        <table id="data-table" class="table table-striped" border="1" align="center">
             <th>ストレージキー（ランダムな数字）</th>
             <th>回答日時</th>
             <th>会社・ユーザー情報</th>
@@ -27,7 +27,8 @@
         </table>
     </div>
     <div>
-        <a href="index.html">診断に戻る</a>
+        <a href="form.html">診断に戻る</a>
+        <a href="statsTest.html">回答の集計を見る</a>
     </div>
 <script>
 
@@ -91,12 +92,14 @@ let allData = Object.assign({},...dataArray.map((data)=>({[data.key]:data.value}
     //行をテーブルの最後に追加
     table.appendChild(tr);
 
-  }
+    
     //ログ出力
     console.log(storageKey+":"+storageValue);
 
-   // 保存するJSONファイルの名前
-const fileName = "answers.json";
+ }
+
+let fileNamePrefix = getCurrentTime();
+const fileName = fileNamePrefix+":answers.json";
 // データをJSON形式の文字列に変換する。
 if(Object.keys(allData).length==0){
     //データ数が0なら何もしない
@@ -111,6 +114,54 @@ if(Object.keys(allData).length==0){
     document.body.appendChild(link);
     // リンクを踏むと保存し、保存するJSONファイルの名前をリンクに設定する。
     link.download = fileName;
+}
+
+/******* yyyymmddhh24miss形式の現在時刻を取得するモジュール *******/
+function getCurrentTime(){
+
+//現在時間を取得
+let now = new Date();
+
+/* 年月日時分秒で取得（yyyymmddhh24miss形式）*/
+//年
+let year = now.getFullYear().toString();
+
+//月（一桁なら最初に0を付けて二桁にする/＊getMonth()は今の月-1の値が返ってくるため、+1している）
+let month; 
+ month=adjustDateNumber(now.getMonth()+1);
+
+//日（一桁なら最初に0を付けて二桁にする）
+let date;
+ date = adjustDateNumber(now.getDate());
+
+
+//時（一桁なら最初に0を付けて二桁にする）
+let hours;
+ hours = adjustDateNumber(now.getHours());
+
+
+//分（一桁なら最初に0を付けて二桁にする）
+let minutes;
+ minutes = adjustDateNumber(now.getMinutes());
+
+//秒（一桁なら最初に0を付けて二桁にする）
+let seconds;
+  seconds = adjustDateNumber(now.getSeconds());
+
+let currentTime = year+month+date+hours+minutes+seconds;
+return currentTime;
+
+}
+
+/******* 数字が一桁の場合に冒頭に0を足すモジュール *******/
+function adjustDateNumber(n){
+  let adjustNumber;
+  if(n > 9){
+    adjustNumber = n.toString();
+  }else{
+    adjustNumber = 0+n.toString();
+  }
+  return adjustNumber;
 }
 </script>
 </body>

@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta ="viewport" content="width=device-width, initial-scale=1.0">
+    <title>e-sports診断フローチャート 回答一覧</title>
+    <!-- 先に質問データのjsを読み込んでおく -->
+    <script src="questions.js"></script>
+    <script src="" defer></script>
+    <link rel="stylesheet" href="style.css">
+    <!---PWA用のmanifestファイル-->
+    <link rel="manifest" href="./manifest.json">
+</head>
+<body>
+    <div>
+        <table align="center" border="1" id="table1">
+            <th>質問文</th>
+            <th>選択肢１</th>
+            <th>選択肢２</th>
+            <tr>
+                <td><h4 id="question1sentence">質問1の質問文</h4></td>
+                <td id="question1option1">選んだ人の人数を表示</td>
+                <td id="question1option2">選んだ人の人数を表示</td>
+            </tr>
+            <tr>
+                <td><h4 id="question2sentence">質問2の質問文</h4></td>
+                <td id="question2option1">選んだ人の人数を表示</td>
+                <td id="question2option2">選んだ人の人数を表示</td>
+            </tr>
+            <tr>
+                <td><h4 id="question3sentence">質問3の質問文</h4></td>
+                <td id="question3option1">選んだ人の人数を表示</td>
+                <td id="question3option2">選んだ人の人数を表示</td>
+            </tr>
+            <tr>
+                <td><h4 id="question4sentence">質問4の質問文</h4></td>
+                <td id="question4option1">選んだ人の人数を表示</td>
+                <td id="question4option2">選んだ人の人数を表示</td>
+            </tr>
+            <tr>
+                <td><h4 id="question5sentence">質問5の質問文</h4></td>
+                <td id="question5option1">選んだ人の人数を表示</td>
+                <td id="question5option2">選んだ人の人数を表示</td>
+            </tr>
+            <tr>
+                <td><h4 id="question6sentence">質問6の質問文</h4></td>
+                <td id="question6option1">選んだ人の人数を表示</td>
+                <td id="question6option2">選んだ人の人数を表示</td>
+            </tr>
+            <tr>
+                <td><h4 id="question7sentence">質問7の質問文</h4></td>
+                <td id="question7option1">選んだ人の人数を表示</td>
+                <td id="question7option2">選んだ人の人数を表示</td>
+            </tr>
+            <tr>
+                <td><h4 id="question8sentence">質問8の質問文</h4></td>
+                <td id="question8option1">選んだ人の人数を表示</td>
+                <td id="question8option2">選んだ人の人数を表示</td>
+            </tr>
+            <tr>
+                <td><h4 id="question9sentence">質問9の質問文</h4></td>
+                <td id="question9option1">選んだ人の人数を表示</td>
+                <td id="question9option2">選んだ人の人数を表示</td>
+            </tr>
+            <tr>
+                <td><h4 id="question10sentence">質問10の質問文</h4></td>
+                <td id="question10option1">選んだ人の人数を表示</td>
+                <td id="question10option2">選んだ人の人数を表示</td>
+            </tr>
+            <tr>
+                <td><h4 id="question11sentence">質問11の質問文</h4></td>
+                <td id="question11option1">選んだ人の人数を表示</td>
+                <td id="question11option2">選んだ人の人数を表示</td>
+            </tr>
+            <tr>
+                <td><h4 id="question12sentence">質問12の質問文</h4></td>
+                <td id="question12option1">選んだ人の人数を表示</td>
+                <td id="question12option2">選んだ人の人数を表示</td>
+            </tr>
+            <tr>
+                <td><h4 id="question13sentence">質問13の質問文</h4></td>
+                <td id="question13option1">選んだ人の人数を表示</td>
+                <td id="question13option2">選んだ人の人数を表示</td>
+            </tr>
+            <tr>
+                <td><h4 id="question14sentence">質問14の質問文</h4></td>
+                <td id="question14option1">選んだ人の人数を表示</td>
+                <td id="question14option2">選んだ人の人数を表示</td>
+            </tr>
+        </table>
+
+    </div>
+    <div>
+        <a href="answersInformation.html">管理者画面トップに戻る</a>
+    </div>
+    <div>
+        <b><a id="download" href="#" download="回答集計.csv" onclick="csvDownload()">csvファイルダウンロード</a></b>
+    </div>
+<script>
+ /*******　questions.jsで定義した質問を読み込み ********/
+let questions = window.questions;
+
+/*******　質問の生成 ********/
+/*【質問１】*/
+const question1 = questions.Question1;
+/*【質問2】*/
+const question2 = questions.Question2;
+/*【質問3】*/
+const question3 = questions.Question3;
+/* 【質問4】 */
+const question4 = questions.Question4;
+/* 【質問5】 */
+const question5 = questions.Question5;
+/* 【質問6】 */
+const question6 = questions.Question6;
+/*【質問7】*/
+const question7 = questions.Question7;
+/*【質問8】*/
+const question8 = questions.Question8;
+/*【質問9】*/
+const question9 = questions.Question9;
+/* 【質問10】 */
+const question10 = questions.Question10;
+/* 【質問11】 */
+const question11 = questions.Question11;
+/* 【質問12】 */
+const question12 = questions.Question12;
+/* 【質問13】 */
+const question13 = questions.Question13;
+/* 【質問14】 */
+const question14 = questions.Question14;
+
+
+/*グローバル変数を定義*/
+let storageKey;
+let storageValue;
+let storageLength = window.localStorage.length;
+
+let question1Option1Count = 0;
+let question1Option2Count = 0;
+let question1Array=[];
+
+let question2Option1Count = 0;
+let question2Option2Count = 0;
+let question2Array=[];
+
+let question3Option1Count = 0;
+let question3Option2Count = 0;
+let question3Array=[];
+
+let question4Option1Count = 0;
+let question4Option2Count = 0;
+let question4Array=[];
+
+let question5Option1Count = 0;
+let question5Option2Count = 0;
+let question5Array=[];
+
+let question6Option1Count = 0;
+let question6Option2Count = 0;
+let question6Array=[];
+
+let question7Option1Count = 0;
+let question7Option2Count = 0;
+let question7Array=[];
+
+let question8Option1Count = 0;
+let question8Option2Count = 0;
+let question8Array=[];
+
+let question9Option1Count = 0;
+let question9Option2Count = 0;
+let question9Array=[];
+
+let question10Option1Count = 0;
+let question10Option2Count = 0;
+let question10Array=[];
+
+let question11Option1Count = 0;
+let question11Option2Count = 0;
+let question11Array=[];
+
+let question12Option1Count = 0;
+let question12Option2Count = 0;
+let question12Array=[];
+
+let question13Option1Count = 0;
+let question13Option2Count = 0;
+let question13Array=[];
+
+let question14Option1Count = 0;
+let question14Option2Count = 0;
+let question14Array=[];
+
+/* 質問文を表示 */
+document.getElementById('question1sentence').textContent = question1.sentence;
+document.getElementById('question2sentence').textContent = question2.sentence;
+document.getElementById('question3sentence').textContent = question3.sentence;
+document.getElementById('question4sentence').textContent = question4.sentence;
+document.getElementById('question5sentence').textContent = question5.sentence;
+document.getElementById('question6sentence').textContent = question6.sentence;
+document.getElementById('question7sentence').textContent = question7.sentence;
+document.getElementById('question8sentence').textContent = question8.sentence;
+document.getElementById('question9sentence').textContent = question9.sentence;
+document.getElementById('question10sentence').textContent = question10.sentence;
+document.getElementById('question11sentence').textContent = question11.sentence;
+document.getElementById('question12sentence').textContent = question12.sentence;
+document.getElementById('question13sentence').textContent = question13.sentence;
+document.getElementById('question14sentence').textContent = question14.sentence;
+
+
+
+/* ローカルストレージの要素数（レコード数）の文だけfor文で繰り返す */
+  let i
+  for(i=0;i<storageLength;i++){
+
+    //キーの取得
+    storageKey = localStorage.key(i);
+    //値の取得
+    storageValue = window.localStorage.getItem(storageKey);
+    //文字列として保存されているため、オブジェクト化する
+    let storageValueObj = JSON.parse(storageValue);
+
+    //回答データを取得
+    let answers = storageValueObj["回答"];
+    //回答データの質問番号の一覧を取得
+    let questionNumberArray = Object.keys(answers);
+
+    //質問番号を個別取得し、どの質問番号でどの選択肢を選んだのかを取得する
+    let j;
+    for(j=0;j<questionNumberArray.length;j++){
+        //質問番号の取得
+        let questionNumber = questionNumberArray[j];
+        //質問番号から、選んだ選択肢（1or2）を取得
+        let chosenOption = answers[questionNumber];
+        
+        //質問番号ごとに分けた配列に、選んだ選択肢番号を追加し、選択肢が選ばれた数をカウント
+        switch(questionNumber){
+            case '1':
+                question1Array.push(chosenOption);
+                //選択肢が選ばれた数をカウント
+                if(chosenOption==1){
+                    question1Option1Count++;
+                }else{
+                    question1Option2Count++;
+                }
+                break;
+            case '2':
+                question2Array.push(chosenOption);
+                //選択肢が選ばれた数をカウント
+                if(chosenOption==1){
+                    question2Option1Count++;
+                }else{
+                    question2Option2Count++;
+                }
+                break;
+            case '3':
+                question3Array.push(chosenOption);
+                //選択肢が選ばれた数をカウント
+                if(chosenOption==1){
+                    question3Option1Count++;
+                }else{
+                    question3Option2Count++;
+                }
+                break;
+            case '4':
+                question4Array.push(chosenOption);
+                //選択肢が選ばれた数をカウント
+                if(chosenOption==1){
+                    question4Option1Count++;
+                }else{
+                    question4Option2Count++;
+                }
+                break;
+            case '5':
+                question5Array.push(chosenOption);
+                //選択肢が選ばれた数をカウント
+                if(chosenOption==1){
+                    question5Option1Count++;
+                }else{
+                    question5Option2Count++;
+                }
+                break;
+            case '6':
+                question6Array.push(chosenOption);
+                //選択肢が選ばれた数をカウント
+                if(chosenOption==1){
+                    question6Option1Count++;
+                }else{
+                    question6Option2Count++;
+                }
+                break;
+            case '7':
+                question7Array.push(chosenOption);
+                //選択肢が選ばれた数をカウント
+                if(chosenOption==1){
+                    question7Option1Count++;
+                }else{
+                    question7Option2Count++;
+                }
+                break;
+            case '8':
+                question8Array.push(chosenOption);
+                //選択肢が選ばれた数をカウント
+                if(chosenOption==1){
+                    question8Option1Count++;
+                }else{
+                    question8Option2Count++;
+                }
+                break;
+            case '9':
+                question9Array.push(chosenOption);
+                //選択肢が選ばれた数をカウント
+                if(chosenOption==1){
+                    question9Option1Count++;
+                }else{
+                    question9Option2Count++;
+                }
+                break;
+            case '10':
+                question10Array.push(chosenOption);
+                //選択肢が選ばれた数をカウント
+                if(chosenOption==1){
+                    question10Option1Count++;
+                }else{
+                    question10Option2Count++;
+                }
+                break;
+            case '11':
+                question11Array.push(chosenOption);
+                //選択肢が選ばれた数をカウント
+                if(chosenOption==1){
+                    question11Option1Count++;
+                }else{
+                    question11Option2Count++;
+                }
+                break;
+            case '12':
+                question12Array.push(chosenOption);
+                //選択肢が選ばれた数をカウント
+                if(chosenOption==1){
+                    question12Option1Count++;
+                }else{
+                    question12Option2Count++;
+                }
+                break;
+            case '13':
+                question13Array.push(chosenOption);
+                //選択肢が選ばれた数をカウント
+                if(chosenOption==1){
+                    question13Option1Count++;
+                }else{
+                    question13Option2Count++;
+                }
+                break;
+            case '14':
+                question1Array.push(chosenOption);
+                //選択肢が選ばれた数をカウント
+                if(chosenOption==1){
+                    question14Option1Count++;
+                }else{
+                    question14Option2Count++;
+                }
+                break;
+        }
+    }
+ }
+
+
+/* htmlのtd要素に表示する */
+//質問１
+document.getElementById('question1option1').textContent = tdInnerHtmlGenerator(question1.option1.name,question1Option1Count);
+document.getElementById('question1option2').textContent = tdInnerHtmlGenerator(question1.option2.name,question1Option2Count);
+//質問2
+document.getElementById('question2option1').textContent = tdInnerHtmlGenerator(question2.option1.name,question2Option1Count);
+document.getElementById('question2option2').textContent = tdInnerHtmlGenerator(question2.option2.name,question2Option2Count);
+//質問3
+document.getElementById('question3option1').textContent = tdInnerHtmlGenerator(question3.option1.name,question3Option1Count);
+document.getElementById('question3option2').textContent = tdInnerHtmlGenerator(question3.option2.name,question3Option2Count);
+//質問4
+document.getElementById('question4option1').textContent = tdInnerHtmlGenerator(question4.option1.name,question4Option1Count);
+document.getElementById('question4option2').textContent = tdInnerHtmlGenerator(question4.option2.name,question4Option2Count);
+//質問5
+document.getElementById('question5option1').textContent = tdInnerHtmlGenerator(question5.option1.name,question5Option1Count);
+document.getElementById('question5option2').textContent = tdInnerHtmlGenerator(question5.option2.name,question5Option2Count);
+//質問6
+document.getElementById('question6option1').textContent = tdInnerHtmlGenerator(question6.option1.name,question6Option1Count);
+document.getElementById('question6option2').textContent = tdInnerHtmlGenerator(question6.option2.name,question6Option2Count);
+//質問7
+document.getElementById('question7option1').textContent = tdInnerHtmlGenerator(question7.option1.name,question7Option1Count);
+document.getElementById('question7option2').textContent = tdInnerHtmlGenerator(question7.option2.name,question7Option2Count);
+//質問8
+document.getElementById('question8option1').textContent = tdInnerHtmlGenerator(question8.option1.name,question8Option1Count);
+document.getElementById('question8option2').textContent = tdInnerHtmlGenerator(question8.option2.name,question8Option2Count);
+//質問9
+document.getElementById('question9option1').textContent = tdInnerHtmlGenerator(question9.option1.name,question9Option1Count);
+document.getElementById('question9option2').textContent = tdInnerHtmlGenerator(question9.option2.name,question9Option2Count);
+//質問10
+document.getElementById('question10option1').textContent = tdInnerHtmlGenerator(question10.option1.name,question10Option1Count);
+document.getElementById('question10option2').textContent = tdInnerHtmlGenerator(question10.option2.name,question10Option2Count);
+//質問11
+document.getElementById('question11option1').textContent = tdInnerHtmlGenerator(question11.option1.name,question11Option1Count);
+document.getElementById('question11option2').textContent = tdInnerHtmlGenerator(question11.option2.name,question11Option2Count);
+//質問12
+document.getElementById('question12option1').textContent = tdInnerHtmlGenerator(question12.option1.name,question12Option1Count);
+document.getElementById('question12option2').textContent = tdInnerHtmlGenerator(question12.option2.name,question12Option2Count);
+//質問13
+document.getElementById('question13option1').textContent = tdInnerHtmlGenerator(question13.option1.name,question13Option1Count);
+document.getElementById('question13option2').textContent = tdInnerHtmlGenerator(question13.option2.name,question13Option2Count);
+//質問14
+document.getElementById('question14option1').textContent = tdInnerHtmlGenerator(question14.option1.name,question14Option1Count);
+document.getElementById('question14option2').textContent = tdInnerHtmlGenerator(question14.option2.name,question14Option2Count);
+
+function tdInnerHtmlGenerator(optionName,optionCount){
+    return "「" + optionName + "」を選んだのは:" + optionCount+"人";
+}
+
+//csvダウンロード
+let table = document.getElementById('table1')
+function csvDownload() {
+    //文字コードをBOM付きUTF-8に指定（Excelで開くときに正しくエンコードされるようにする）
+    let bom = new Uint8Array([0xEF, 0xBB, 0xBF]);
+    //対象のテーブルを取得
+    let table = document.getElementById('table1');
+    //data_csvに文字データとして値を格納していく
+    let data_csv="";
+
+    //テーブルのレコードの数＝質問の数だけ繰り返す
+    let loop = Object.keys(questions).length;
+    for(let i = 0;  i <= loop; i++){
+
+        //列の数＝行のセルの数だけ繰り返す
+        for(let j = 0; j < table.rows[i].cells.length; j++){
+            //HTML中の表のセル値をdata_csvに格納
+            data_csv += table.rows[i].cells[j].innerText;
+            //行終わりなら改行コードを追加
+            if(j == table.rows[i].cells.length-1){
+                data_csv += "\n";
+            }else {
+            //行終わりじゃなければ、セル値の区切り文字になる,を追加
+                data_csv += ",";
+            }
+        }
+
+    }
+
+    //data_csvのデータをcsvとしてダウンロードする関数
+    let blob = new Blob([ bom, data_csv], { "type" : "text/csv" });
+
+    document.getElementById("download").href = window.URL.createObjectURL(blob);
+    
+    delete data_csv;//data_csvオブジェクトはもういらないので消去してメモリを開放
+    }
+
+</script>
+</body>
+</html>

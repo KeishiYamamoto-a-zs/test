@@ -26,9 +26,11 @@
             </tr>
         </table>
     </div>
-    <div>
+    <div id="link-container" class="ml-2">
         <a href="index.html">診断に戻る</a>
+        <br>
         <a href="statsTest.html">回答の集計を見る</a>
+        <br>
     </div>
 <script>
 
@@ -111,7 +113,7 @@ if(Object.keys(allData).length==0){
     link.href = "data:text/plain," + encodeURIComponent(data);
     //HTML上で表示
     link.innerHTML="保存";
-    document.body.appendChild(link);
+    document.getElementById('link-container').appendChild(link);
     // リンクを踏むと保存し、保存するJSONファイルの名前をリンクに設定する。
     link.download = fileName;
 }

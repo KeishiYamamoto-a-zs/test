@@ -3,38 +3,17 @@ const questions = window.questions;
 
 
 /*******　質問の生成 ********/
-/*【質問１】*/
-const question1 = questions.Question1;
-/*【質問2】*/
-const question2 = questions.Question2;
-/*【質問3】*/
-const question3 = questions.Question3;
-/* 【質問4】 */
-const question4 = questions.Question4;
-/* 【質問5】 */
-const question5 = questions.Question5;
-/* 【質問6】 */
-const question6 = questions.Question6;
-/*【質問7】*/
-const question7 = questions.Question7;
-/*【質問8】*/
-const question8 = questions.Question8;
-/*【質問9】*/
-const question9 = questions.Question9;
-/* 【質問10】 */
-const question10 = questions.Question10;
-/* 【質問11】 */
-const question11 = questions.Question11;
-/* 【質問12】 */
-const question12 = questions.Question12;
-/* 【質問13】 */
-const question13 = questions.Question13;
-/* 【質問14】 */
-const question14 = questions.Question14;
+//質問連想配列の作成
+let questionsArrayList = {};
+//キー
+let questionsArrayListKey;
+//質問の数だけ繰り返す
+for(i=0;i<questions.length;i++){
+  questionsArrayListKey = 1+i;
+  questionsArrayListValue = questions[i];
+  questionsArrayList[questionsArrayListKey]=questionsArrayListValue;
+}
 
-
-/* 質問配列の作成 */
-const questionsArrayList ={1:question1,2:question2,3:question3,4:question4,5:question5,6:question6,7:question7,8:question8,9:question9,10:question10,11:question11,12:question12,13:question13,14:question14}
 
 
 /*******　グローバル変数の管理 ********/
@@ -55,7 +34,7 @@ let currentQuestionNumber = 1;
 //一つ前の質問番号
 let previousQuestionNumber = 0;
 //現在の質問（質問番号１で初期化）
-let currentQuestion = question1;
+let currentQuestion = questionsArrayList[1];
 //選択肢１の表示名
 let currentQuestionOption1Name = currentQuestion.option1.name;
 //選択肢２の表示名
@@ -74,7 +53,7 @@ updateQuestion();
 function updateQuestion(){
   
   //質問文の更新
-  document.getElementById("question").textContent = currentQuestion.sentence;
+  document.getElementById("question").innerText = currentQuestion.sentence;
   //選択肢１の更新
   document.getElementById("option1").textContent = currentQuestion.option1.name;
   //選択肢２の更新
@@ -180,6 +159,7 @@ function backToPreviousQuestion(){
     currentQuestionNumber=previousQuestionNumber;
     //質問を一つ前に戻す
     currentQuestion=questionsArrayList[currentQuestionNumber];
+    console.log(currentQuestion);
 
     //前回の質問番号を更新
     if(questionNumberHistory.length==0){
@@ -211,7 +191,7 @@ function restart(){
   //現在の質問番号・一つ前の質問番号・現在の質問の初期化
   currentQuestionNumber = 1;
   previousQuestionNumber = 0;
-  currentQuestion=question1;
+  currentQuestion=questionsArrayList[currentQuestionNumber];
 
   //画面の更新
   pageTransition();

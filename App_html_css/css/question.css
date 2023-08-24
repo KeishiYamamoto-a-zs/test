@@ -4,6 +4,11 @@ p{
   margin-bottom:160px;
   width: auto;
 }
+
+#question{
+  white-space: normal;
+}
+
 #buttons1{
   margin-left: 500px;
 }

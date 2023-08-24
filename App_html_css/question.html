@@ -7,7 +7,7 @@
     <!-- BootstrapのCSS読み込み -->
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/question.css">
-    <script src="questions.js"></script>
+    <script src="./questions.js"></script>
     <script src="app.js" defer></script>
     <title>質問</title>
     <link rel="manifest" href="manifest.json">
@@ -26,9 +26,10 @@
     </div>
   </div>
   <div id="container">
-    <div>
-      <p id="question" class="text-center">プライベートでゲームする社員は多いですか？</p>
-    </div>
+        <div>
+          <p id="question" class="text-center">プライベートでゲームする社員は多いですか？</p>
+        </div>
+  </div>
     <div class="text-center">
       <div id=option1 class="btn btn--option1 btn--cubic btn--shadow mr-5"onclick="answerQuestion(1);pageTransition()">はい</div>
       <div id=option2 class="btn btn--option2 btn--cubic btn--shadow ml-5"onclick="answerQuestion(2);pageTransition()">いいえ</div>

@@ -39,6 +39,7 @@ let currentQuestion = questionsArrayList[1];
 let currentQuestionOption1Name = currentQuestion.option1.name;
 //選択肢２の表示名
 let currentQuestionOption2Name = currentQuestion.option2.name;
+
 //回答を保存する連想配列：キーが質問番号で値が選択肢番号
 let answers = {};
 //回答した質問番号の履歴を保存する配列
@@ -85,8 +86,9 @@ function saveToLocalStorage(){
 }
 
 
-/******* 個別回答保存・質問遷移機能 *******/
+/******* 個別回答保存機能 *******/
 function answerQuestion(optionNumber) {
+
   /* 選んだ選択肢を格納する変数を宣言 */
   let chosenOption;
 
@@ -111,8 +113,17 @@ function answerQuestion(optionNumber) {
   /* 選んだ選択肢を選択肢番号履歴に保存 */
   optionNumberHistory.push(optionNumber);
   console.log(optionNumberHistory);
+
   //回答と履歴を保存したので、一つ前の質問番号を更新する
   previousQuestionNumber=questionNumberHistory[questionNumberHistory.length-1];
+
+  //最後の選択肢かどうかをチェック
+  checkLastOption(chosenOption);
+
+}
+
+/******* 質問遷移・結果画面遷移機能 *******/
+function checkLastOption(chosenOption){
 
   /* 最後の質問なら、保存して結果画面に遷移 */
   if(chosenOption.isThisLastOption==true){
@@ -134,7 +145,9 @@ function answerQuestion(optionNumber) {
 
   /* 画面（質問文・選択肢）の更新:フェードアウトに合わせて遅延実行 */
   window.setTimeout(updateQuestion,300);
+
   }
+
 }
 
 
@@ -159,7 +172,6 @@ function backToPreviousQuestion(){
     currentQuestionNumber=previousQuestionNumber;
     //質問を一つ前に戻す
     currentQuestion=questionsArrayList[currentQuestionNumber];
-    console.log(currentQuestion);
 
     //前回の質問番号を更新
     if(questionNumberHistory.length==0){
@@ -221,14 +233,11 @@ restartButton.addEventListener('click',function(){
 /******* アニメーション機能 *******/
 //ページ遷移
 function pageTransition(){
-  
   fadeOut();
   fadeIn();
-
 }
 //フェードアウト
 function fadeOut(){
-
   const keyframes ={
     opacity:["1","0"]
   }
@@ -236,14 +245,11 @@ function fadeOut(){
     fill:"forwards" ,
     duration:300
   }
-
 // アニメーションを加える要素を指定
 document.getElementById('container').animate(keyframes,timing);
-
 }
 //フェードイン
 function fadeIn(){
-
   const keyframes ={
     opacity:["0","1"]
   }
@@ -254,7 +260,6 @@ function fadeIn(){
   }
   // アニメーションを加える要素を指定
   document.getElementById('container').animate(keyframes,timing);
-
 }
 
 /******* yyyymmddhh24miss形式の現在時刻（ローカルストレージのキー）を取得するモジュール *******/
@@ -275,11 +280,9 @@ let month;
 let date;
  date = adjustDateNumber(now.getDate());
 
-
 //時（一桁なら最初に0を付けて二桁にする）
 let hours;
  hours = adjustDateNumber(now.getHours());
-
 
 //分（一桁なら最初に0を付けて二桁にする）
 let minutes;

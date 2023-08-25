@@ -13,10 +13,12 @@
 </head>
 <body>
     <div>
-        <table align="center" border="1" id="statsTable" style="width:95%;">
+        <table align="center" border="1" id="statsTable" style="width:98%;">
             <th>質問文</th>
             <th>選択肢１</th>
+            <th>人数</th>
             <th>選択肢２</th>
+            <th>人数</th>
         </table>
     </div>
     <div>
@@ -100,13 +102,21 @@ for(k=0;k<questions.length;k++){
     questionSentence.innerHTML= '<h4>'+questions[k].sentence+'</h4>';
     tr.appendChild(questionSentence);
 
-    let option1Td = document.createElement('td');
-    option1Td.innerText = "「"+questions[k].option1.name+"」を選んだのは："+statsArrayList[k+1].option1+"人";
-    tr.appendChild(option1Td);
+    let option1Name = document.createElement('td');
+    option1Name.innerText = questions[k].option1.name;
+    tr.appendChild(option1Name);
 
-    let option2Td = document.createElement('td');
-    option2Td.innerText = "「"+questions[k].option2.name+"」を選んだのは："+statsArrayList[k+1].option2+"人";
-    tr.appendChild(option2Td);
+    let option1Number = document.createElement('td');
+    option1Number.innerText = statsArrayList[k+1].option1;
+    tr.appendChild(option1Number);
+
+    let option2Name = document.createElement('td');
+    option2Name.innerText = questions[k].option2.name;
+    tr.appendChild(option2Name);
+
+    let option2Number = document.createElement('td');
+    option2Number.innerText = statsArrayList[k+1].option2;
+    tr.appendChild(option2Number);
 
     statsTable.appendChild(tr);
 }
@@ -121,7 +131,7 @@ function csvDownload() {
     //data_csvに文字データとして値を格納していく
     let data_csv="";
 
-    //テーブルのレコードの数＝質問の数だけ繰り返す
+    //テーブルのレコードの数＝質問の数+1だけ繰り返す（thも出力するため）
     let loop = Object.keys(questions).length;
     for(let i = 0;  i <= loop; i++){
 

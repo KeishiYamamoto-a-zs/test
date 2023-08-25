@@ -17,7 +17,7 @@ const urlsToCache = [
   './images/roketleague.jpg',
   './images/splatoon3.png',
   './images/streetfighter6.png',
-  './images/smabura.jfif',
+  './images/sumabura.jfif',
   './answersInformation.html',
   './app.js',
   './checkPhoto.html',

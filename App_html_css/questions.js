@@ -1,5 +1,5 @@
 /*******　json形式で全ての質問を定義し、グローバル変数に格納 ********/
-window.questions =  [
+window.questions = [
   {
     "number":"1", 
     "sentence": "1:社員の方々の年齢層はどちらが多いですか？",
@@ -37,14 +37,14 @@ window.questions =  [
   },
   {
     "number":"6", 
-    "sentence": "6:個人戦とチーム戦では、どちらをお好きな方が多いですか？",
+    "sentence": "6:個人戦とチーム戦では、\nどちらをお好きな方が多いですか？",
     "option1":{"number":1,"name":"個人戦","nextQuestionNumber":9,"isThisLastOption":false,"href":""},
     "option2":{"number":2,"name":"チーム戦","nextQuestionNumber":8,"isThisLastOption":false,"href":""}
 
   },
   {
     "number":"7", 
-    "sentence": "7:レースゲームと格闘ゲームでは、どちらをお好きな方が多いですか？",
+    "sentence": "7:レースゲームと格闘ゲームでは、\nどちらをお好きな方が多いですか？",
     "option1":{"number":1,"name":"レースゲーム","nextQuestionNumber":1,"isThisLastOption":true,"href":"result6.html"},
     "option2":{"number":2,"name":"格闘ゲーム","nextQuestionNumber":1,"isThisLastOption":true,"href":"result3.html"}
 

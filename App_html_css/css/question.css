@@ -13,15 +13,15 @@ p{
   margin-left: 500px;
 }
 
-div.btn--option1,div.btn--option2{
+#option1,#option2{
   color: #fff;
   background-color: #0ad696;
   border-bottom: 5px solid #007c2f;
-  padding: 50px 100px;
+  padding: 60px;
   border-radius: 30px;
 }
 
-div.btn--option1:active,div.btn--option2:active{
+#option1:active,#option2:active{
   margin-top: 3px;
   color: #fff;
   background: #0ad696;
@@ -53,7 +53,7 @@ div.btn--option1:active,div.btn--option2:active{
   border-bottom: 2px solid #007c2f;
 }
 
-div.btn--shadow {
+.btn--shadow {
   -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
   box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
 }

@@ -38,6 +38,7 @@
                     <div class="mb-5">
                         <label for="employeeSize" class="form-label" style="font-size: 25px;">従業員規模</label>
                         <select class="form-control" id="employeeSize" name="numberOfEmployees">
+                            <option value="" selected>選択してください</option>
                             <option value="~50">~50</option>
                             <option value="51~100">51~100</option>
                             <option value="101~500">101~500</option>
@@ -51,7 +52,7 @@
                         <a onclick="setSessionStorage();" style="color: white;" class="btn btn--start btn--shadow">スタート</a>
                         <button type="button" id="backbutton" class="btn btn-light btn-lg" onclick="back();">戻る</button>
                     </div>
-                    
+
                 </form>
                
             </div>
@@ -71,6 +72,7 @@
 
             var companyName = document.getElementById('companyName').value.trim();
             var fullName = document.getElementById('userName').value.trim();
+            var employeeSize = document.getElementById('employeeSize').value;
             var isValid = true;
 
             if (companyName === "") {
@@ -80,6 +82,11 @@
 
             if (fullName === "") {
                 document.getElementById('fullNameError').textContent = '氏名を入力してください。';
+                isValid = false;
+            }
+
+            if (employeeSize === "") {
+                document.getElementById('companyOption').textContent = '従業員規模を選択してください。';
                 isValid = false;
             }
 

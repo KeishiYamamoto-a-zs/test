@@ -8,6 +8,7 @@ const urlsToCache = [
   './css/question.css',
   './css/result1.css',
   './css/title.css',
+  './images/a-zs_logo_full.png',
   './images/a-zs_logo.png',
   './images/apex.jpg',
   './images/fallguys.jpg',

@@ -1,133 +1,104 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <!-- BootstrapのCSS読み込み -->
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/inputform.css">
     <title>個人情報入力</title>
     <link rel="manifest" href="manifest.json">
-</head>
-<body>
-  <header>
-    <img src="images/a-zs_logo.full.png" class="ml-3 mt-3">
-  </header>
-  <div class="container"> <!-- コンテナーを追加 -->
-    <div class="row justify-content-center"> <!-- センタリング用の行を追加 -->
-      <div class="col-sm-8"> <!-- カラムを追加して幅を調整 -->
-       <form id="submitForm" name="form" onsubmit="return validationForm()" action="question.html">
-
-        <div class="mb-5">
-          <label for="companyName" class="form-label" style="font-size: 25px;">企業名</label>
-          <input type="text" name="companyName" class="form-control" id="companyName" aria-describedby="emailHelp" size="20" >
-          <span id="companyNameError" class="text-danger"></span> <!-- 企業名エラー表示用 -->
-        </div>
-
-        <div class="mb-5">
-          <label for="fullName" class="form-label" style="font-size: 25px;">氏名</label>
-          <input type="text" name="userName" class="form-control" id="userName">
-          <span id="fullNameError" class="text-danger"></span> <!-- 氏名エラー表示用 -->
-        </div>
-
-        <div class="mb-5 form-check">
-          <label class="mr-3" style="font-size: 25px;">従業員規模</label>
-          <br>
-          <div class="form-check form-check-inline">
-              <input class="form-check-input employee-size-option mr-4" type="radio" name="numberOfEmployees"  value="~50" style="transform:scale(2.0)">
-              <label class="form-check-label mr-3" for="inlineRadio1" style="font-size: 25px;">~50</label>
-          </div>
-          <div class="form-check form-check-inline">
-              <input class="form-check-input employee-size-option mr-4" type="radio" name="numberOfEmployees" value="51~100" style="transform:scale(2.0)">
-              <label class="form-check-label mr-3" for="inlineRadio2" style="font-size: 25px;">51~100</label>
-          </div>
-          <div class="form-check form-check-inline">
-              <input class="form-check-input employee-size-option mr-4" type="radio" name="numberOfEmployees" value="101~500" style="transform:scale(2.0)">
-              <label class="form-check-label mr-3" for="inlineRadio2" style="font-size: 25px;">101~500</label>
-          </div>
-          <div class="form-check form-check-inline">
-              <input class="form-check-input employee-size-option mr-4" type="radio" name="numberOfEmployees" value="501~1000" style="transform:scale(2.0)">
-              <label class="form-check-label mr-3" for="inlineRadio2" style="font-size: 25px;">501~1000</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input employee-size-option mr-4" type="radio" name="numberOfEmployees" value="1000~" style="transform:scale(2.0)">
-            <label class="form-check-label mr-3" for="inlineRadio2" style="font-size: 25px;">1000~</label>
-        </div>
-        <div>
-            <span id="companyOption" class="text-danger"></span>
-        </div>
-        </div>
-          <div class="text-center" id="buttons">
-            <a onclick="setSessionStorage();" style="color: white;" class="btn btn--start btn--shadow">スタート</a>
-            
-       </form>
-        <button type="button" id="backbutton" class="btn btn-light btn-lg"onclick="back();">戻る</button>
-      </div>
-    </div>
-  </div>
-  <script>
-
-function back() {
-    // 任意のロジックを実行 (例: バリデーション)
-    location.href = 'checkPhoto.html';
-}
-
-
-function validationForm() {
-  // 既存のエラーをクリア
-  document.getElementById('companyNameError').textContent = '';
-  document.getElementById('fullNameError').textContent = '';
-
-  var companyName = document.getElementById('companyName').value.trim();
-  var fullName = document.getElementById('userName').value.trim();
-  var selectedOption = document.querySelector('input[name="numberOfEmployees"]:checked');
-  var isValid = true; // バリデーション全体の結果
-
-  if (companyName === "") {
-    document.getElementById('companyNameError').textContent = '企業名を入力してください。';
-    isValid = false;
-  }
-
-  if (fullName === "") {
-    document.getElementById('fullNameError').textContent = '氏名を入力してください。';
-    isValid = false;
-  }
-
-  if (selectedOption === null) {
-    document.getElementById('companyOption').textContent = '従業員規模を選択してください。';
-    isValid = false;
-  }
-
-  console.log(isValid);
-
-  return isValid;
-}
-
-    let formElements=document.forms.form;
-    let companyName=formElements.companyName.value;
-    let numberOfEmployees=formElements.numberOfEmployees.value;
-    let userName= formElements.userName.value;
-    
-    function setSessionStorage(){
-        let isValid = validationForm();
-        console.log(isValid);
-
-        if(isValid==false){
-
-        }else{
-        //formの中身を変数に格納
-        companyName=formElements.companyName.value;
-        numberOfEmployees=formElements.numberOfEmployees.value;
-        userName= formElements.userName.value;
-        //各変数をセッションストレージに保存
-        sessionStorage.setItem("companyName",companyName);
-        sessionStorage.setItem("numberOfEmployees",numberOfEmployees);
-        sessionStorage.setItem("userName",userName);
-
-        console.log(sessionStorage)
-        //診断画面に遷移
-        window.location.href="question.html"
+    <style>
+        .error-message {
+            min-height: 25px; /* エラーメッセージのためのスペースを確保 */
+            display: block;
         }
-    }
+    </style>
+</head>
 
-</script>
+<body>
+    <header>
+        <img src="images/a-zs_logo.full.png" class="ml-3 mt-3">
+    </header>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-sm-8">
+                <form id="submitForm" name="form" onsubmit="return validationForm()" action="question.html">
+
+                    <div class="mb-5">
+                        <label for="companyName" class="form-label" style="font-size: 25px;">企業名</label>
+                        <input type="text" name="companyName" class="form-control" id="companyName" aria-describedby="emailHelp" size="20">
+                        <span id="companyNameError" class="text-danger error-message"></span>
+                    </div>
+
+                    <div class="mb-5">
+                        <label for="fullName" class="form-label" style="font-size: 25px;">氏名</label>
+                        <input type="text" name="userName" class="form-control" id="userName">
+                        <span id="fullNameError" class="text-danger error-message"></span>
+                    </div>
+
+                    <div class="mb-5">
+                        <label for="employeeSize" class="form-label" style="font-size: 25px;">従業員規模</label>
+                        <select class="form-control" id="employeeSize" name="numberOfEmployees">
+                            <option value="~50">~50</option>
+                            <option value="51~100">51~100</option>
+                            <option value="101~500">101~500</option>
+                            <option value="501~1000">501~1000</option>
+                            <option value="1000~">1000~</option>
+                        </select>
+                        <span id="companyOption" class="text-danger error-message"></span>
+                    </div>
+
+                    <div class="text-center" id="buttons">
+                        <a onclick="setSessionStorage();" style="color: white;" class="btn btn--start btn--shadow">スタート</a>
+                        <button type="button" id="backbutton" class="btn btn-light btn-lg" onclick="back();">戻る</button>
+                    </div>
+                    
+                </form>
+               
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function back() {
+            location.href = 'checkPhoto.html';
+        }
+
+        function validationForm() {
+            // エラーメッセージの初期化
+            document.getElementById('companyNameError').textContent = '';
+            document.getElementById('fullNameError').textContent = '';
+            document.getElementById('companyOption').textContent = '';
+
+            var companyName = document.getElementById('companyName').value.trim();
+            var fullName = document.getElementById('userName').value.trim();
+            var isValid = true;
+
+            if (companyName === "") {
+                document.getElementById('companyNameError').textContent = '企業名を入力してください。';
+                isValid = false;
+            }
+
+            if (fullName === "") {
+                document.getElementById('fullNameError').textContent = '氏名を入力してください。';
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        function setSessionStorage() {
+            let isValid = validationForm();
+
+            if (isValid) {
+                let formElements = document.forms.form;
+                sessionStorage.setItem("companyName", formElements.companyName.value);
+                sessionStorage.setItem("numberOfEmployees", formElements.numberOfEmployees.value);
+                sessionStorage.setItem("userName", formElements.userName.value);
+                window.location.href = "question.html";
+            }
+        }
+    </script>
+
 </body>
+
 </html>
